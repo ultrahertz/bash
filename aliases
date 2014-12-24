@@ -1,0 +1,53 @@
+#!/bin/bash
+
+alias ls='ls --color=auto -CF -h'
+alias l='ls'
+alias ll='ls -l'
+alias la='ls -la'
+
+alias cp='cp -ri'
+alias rm='rm -i'
+alias mv='mv -i'
+
+alias e='emacs -nw'
+alias tw='tmux atta -t workspace'
+alias td='tmux atta -t DEV'
+alias vi=vim
+alias websurf='tabbed -df surf -e > /dev/null 2>&1'
+
+alias x='extract'
+
+# Pacman alias examples
+alias pacupg='sudo pacman -Syu'   # Synchronize with repositories and then upgrade packages that are out of date on the local system.
+alias pacin='sudo pacman -S'    # Install specific package(s) from the repositories
+alias pacins='sudo pacman -U'   # Install specific package not from the repositories but from a file 
+alias pacre='sudo pacman -R'    # Remove the specified package(s), retaining its configuration(s) and required dependencies
+alias pacrem='sudo pacman -Rns'   # Remove the specified package(s), its configuration(s) and unneeded dependencies
+alias pacrep='pacman -Si'   # Display information about a given package in the repositories
+alias pacreps='pacman -Ss'    # Search for package(s) in the repositories
+alias pacloc='pacman -Qi'   # Display information about a given package in the local database
+alias paclocs='pacman -Qs'    # Search for package(s) in the local database
+alias paclo="pacman -Qdt"   # List all packages which are orphaned
+alias pacc="sudo pacman -Scc"   # Clean cache - delete all not currently installed package files
+alias paclf="pacman -Ql"    # List all files installed by a given package
+alias pacexpl="pacman -D --asexp" # Mark one or more installed packages as explicitly installed 
+alias pacimpl="pacman -D --asdep" # Mark one or more installed packages as non explicitly installed
+
+# '[r]emove [o]rphans' - recursively remove ALL orphaned packages
+alias pacro="pacman -Qtdq > /dev/null && sudo pacman -Rns \$(pacman -Qtdq | sed -e ':a;N;$!ba;s/\n/ /g')"
+
+# Additional pacman alias examples
+alias pacupd='sudo pacman -Sy && sudo abs'         # Update and refresh the local package and ABS databases against repositories
+alias pacinsd='sudo pacman -S --asdeps'            # Install given package(s) as dependencies
+alias pacmir='sudo pacman -Syy'                    # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
+
+alias pacunlock="sudo rm /var/lib/pacman/db.lck"   # Delete the lock file /var/lib/pacman/db.lck
+alias paclock="sudo touch /var/lib/pacman/db.lck"  # Create the lock file /var/lib/pacman/db.lck
+
+alias pacman-disowned-dirs="comm -23 <(sudo find / \( -path '/dev' -o -path '/sys' -o -path '/run' -o -path '/tmp' -o -path '/mnt' -o -path '/srv' -o -path '/proc' -o -path '/boot' -o -path '/home' -o -path '/root' -o -path '/media' -o -path '/var/lib/pacman' -o -path '/var/cache/pacman' \) -prune -o -type d -print | sed 's/\([^/]\)$/\1\//' | sort -u) <(pacman -Qlq | sort -u)"
+
+alias pacman-disowned-files="comm -23 <(sudo find / \( -path '/dev' -o -path '/sys' -o -path '/run' -o -path '/tmp' -o -path '/mnt' -o -path '/srv' -o -path '/proc' -o -path '/boot' -o -path '/home' -o -path '/root' -o -path '/media' -o -path '/var/lib/pacman' -o -path '/var/cache/pacman' \) -prune -o -type f -print | sort -u) <(pacman -Qlq | sort -u)"
+
+alias dmenu_libreoffice='echo -e "base\ncalc\ndraw\nimpress\nmath\nquickstart\nwriter" | dmenu'
+
+alias serve="ruby -rwebrick -e\"s = WEBrick::HTTPServer.new(:Port => 8080, :DocumentRoot => Dir.pwd); trap('INT') { s.shutdown }; s.start\""
